@@ -1,0 +1,75 @@
+3     Create a class called "Book" with the following data members:
+title (string)
+author (string)
+ISBN (string)
+price (double)
+stock (int)
+In the main function, create an instance of the Book class and initialize its data members. 
+Then, use the fstream library to open a file for writing and write the contents of the Book object to the file in binary format.
+
+
+4     Write a program that reads the contents of a file containing Book objects and prints them to the console. 
+The program should use the fstream library to open the file, read the Book objects one at a time, and print their title, author, ISBN, price and stock to the console.
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#include<iostream>
+#include<fstream>
+using namespace std;
+class book
+{
+public:
+    string title,author,ISBN;
+    double price;
+    int stock;
+};
+int main()
+{
+    ofstream wf("lib.dat", ios::out | ios::binary);
+    if(!wf)
+    {
+        cout << "Cannot open file!" << endl;
+        return 1;
+    }
+    book bk;
+    bk.title = "An Ordinary Man";
+    bk.author = "Harsh Bhadani";
+    bk.ISBN = "Ab1267dgtz";
+    bk.price = 375.99;
+    bk.stock = 36;
+
+    wf.write((char *) &bk, sizeof(book));
+    wf.close();
+
+    if(!wf.good())
+    {
+        cout << "Error occurred at writing time!" << endl;
+        return 1;
+    }
+
+    ifstream rf("lib.dat", ios::in | ios::binary);
+    if(!rf)
+    {
+        cout << "Cannot open file!" << endl;
+        return 1;
+    }
+
+
+    book bkr;
+    rf.read((char *) &bkr, sizeof(book));
+    rf.close();
+    if(!rf.good()) {
+      cout << "Error occurred at reading time!" << endl;
+      return 1;
+    }
+    cout<<"book's Details:"<<endl;
+    cout << "Title: " << bkr.title << endl;
+    cout << "Author: " << bkr.author << endl;
+    cout << "ISBN: "<<bkr.ISBN<<endl;
+    cout << "Price: "<<bkr.price<<endl;
+    cout << "Stock: "<<bkr.stock<<endl;
+
+    exit(0);
+}
