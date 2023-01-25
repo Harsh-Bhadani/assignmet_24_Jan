@@ -1,0 +1,47 @@
+1.	Write a program that creates a class called "Student" with the following data members:
+name (string)
+age (int)
+grade (double)
+In the main function, create an instance of the Student class and initialize its data members. Then, open a file for writing and write the contents of the Student object to the file.
+-------------------------------------------------------------------------------------------------------------------------
+
+#include<bits/stdc++.h>
+#include<string.h>
+#include<fstream>
+
+using namespace std;
+
+class Student
+{
+public:
+    string name;
+    int age;
+    double grade;
+
+};
+
+int main()
+{
+    int size = 20;
+    char str[size];
+    Student stud;
+
+    cout<<"Enter student name: "<<endl;
+    cin.getline(str, size);
+    stud.name = str;
+
+    cout<<"Enter age: "<<endl;
+    cin>>stud.age;
+
+    cout<<"Enter grade: "<<endl;
+    cin>>stud.grade;
+
+    fstream file;
+    file.open("student.txt", ios::out);
+    file<<"Name : "<<stud.name;
+    file<<"\nAge : "<<stud.age;
+    file<<"\nGrade : "<<stud.grade;
+    file.close();
+    return 0;
+
+}
