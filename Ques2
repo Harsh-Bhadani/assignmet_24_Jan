@@ -1,0 +1,35 @@
+2.	Write a program that reads the contents of a file containing Student objects and prints them to the console.
+The program should open the file, read the Student objects one at a time, and print their name, age, and grade to the console.
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+
+#include <iostream>
+#include <stdlib.h>
+using namespace std;
+
+int main()
+{
+    FILE *fptr;
+
+    char filename[100], c;
+
+    cout<<"Enter the filename to open \n";
+    cin>>filename;
+
+    fptr = fopen(filename, "r");
+    if (fptr == NULL)
+    {
+        cout<<"Cannot open file \n";
+        exit(0);
+    }
+
+    c = fgetc(fptr);
+    while (c != EOF)
+    {
+        cout<<c;
+        c = fgetc(fptr);
+    }
+
+    fclose(fptr);
+    return 0;
+}
